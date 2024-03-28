@@ -1,4 +1,4 @@
-#  [Your Portfolio App Name] - A Modern Developer Portfolio
+# A Modern Developer Portfolio
 
 This is a dynamic and customizable portfolio application built with React for web developers to showcase their skills, experience, and projects in a professional and engaging manner.
 
