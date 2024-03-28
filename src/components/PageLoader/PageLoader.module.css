@@ -1,0 +1,11 @@
+.loader{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    z-index: 1000000000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+}

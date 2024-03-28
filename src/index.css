@@ -1,0 +1,161 @@
+.paradox-input {
+    position: relative;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 5px;
+    margin-bottom: 16px;
+    width: 100%;
+    padding: 8px 5px 5px 5px;
+  }
+  .paradox-input.multiple .all-tags {
+    min-height: 1rem;
+    margin: 3px 0 0;
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+  .paradox-input.multiple .all-tags q {
+    font-size: 1em;
+    color: #4e4e4e;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+            user-select: none;
+  }
+  .paradox-input.multiple .all-tags span {
+    background-color: var(--accent);
+    color: #fff;
+    line-height: 1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 1px 4px;
+  }
+  .paradox-input.multiple .all-tags span button {
+    font-size: .7em;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    padding: 0;
+    color: #fff;
+  }
+  .paradox-input.multiple .all-tags span button:hover{
+    color: #000;
+  }
+  .paradox-input.multiple .all-tags b {
+    font-weight: 500;
+    color: #4e4e4e;
+  }
+  .paradox-input.multiple .all-tags b button {
+    font-size: 0.6em;
+  }
+  .paradox-input.file {
+    border: 0;
+  }
+  .paradox-input.file label {
+    position: static !important;
+    background-color: transparent !important;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #000 !important;
+    cursor: pointer;
+  }
+  .paradox-input > input {
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    width: 100%;
+  }
+  .paradox-input > input::-moz-placeholder {
+    opacity: 0;
+  }
+  .paradox-input > input::placeholder {
+    opacity: 0;
+  }
+  .paradox-input > textarea {
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    width: 100%;
+  }
+  .paradox-input > textarea::-moz-placeholder {
+    opacity: 0;
+  }
+  .paradox-input > textarea::placeholder {
+    opacity: 0;
+  }
+  .paradox-input > select {
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    width: 100%;
+  }
+  .paradox-input > select:not(:focus) + label {
+    top: -7px;
+    background-color: red;
+    color: #fff;
+    line-height: 1em;
+    padding: 1px 6px;
+    font-size: 0.9em;
+  }
+  .paradox-input label {
+    position: absolute !important;
+    color: #4e4e4e;
+    top: 6px;
+    left: 5px;
+    padding: 0 4px;
+    text-transform: capitalize;
+    transition: all 100ms;
+  }
+  .paradox-input input:not(:-moz-placeholder-shown) + label, .paradox-input textarea:not(:-moz-placeholder-shown) + label {
+    top: -7px;
+    background-color: red;
+    color: #fff;
+    line-height: 1em;
+    padding: 1px 6px;
+    font-size: 0.9em;
+  }
+  .paradox-input:focus-within label,
+  .paradox-input input:not(:placeholder-shown) + label,
+  .paradox-input textarea:not(:placeholder-shown) + label {
+    top: -7px;
+    background-color: rgb(255, 255, 255);
+    color: #636363;
+    line-height: 1em;
+    padding: 1px 6px;
+    font-size: 0.8em;
+  }
+  .paradox-input input:disabled + label,
+  .paradox-input textarea:disabled + label {
+    background-color: #A8A8A8;
+  }
+  .paradox-input:focus-within {
+    animation: blinkBorderColor 900ms infinite;
+  }
+  .paradox-input:focus-within > input::-moz-placeholder {
+    opacity: 1;
+  }
+  .paradox-input:focus-within > input::placeholder {
+    opacity: 1;
+  }
+  .paradox-input.file {
+    border: 0;
+  }
+  .paradox-input.file label {
+    position: static;
+  }
+  .paradox-input input[type=file] ~ label {
+    position: static !important;
+    background-color: transparent;
+    text-align: center;
+    border: 0;
+    width: -moz-max-content;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+  }
+  .paradox-input input[type=file] ~ label span {
+    color: #000;
+  }

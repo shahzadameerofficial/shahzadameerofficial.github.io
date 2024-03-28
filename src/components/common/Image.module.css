@@ -1,0 +1,19 @@
+.Image{
+    position: relative;
+}
+.Image img{
+    transition: all 500ms;
+}
+.loading{
+    opacity: 0;
+    border-radius: 50px;
+}
+.loaded{
+    opacity: 1;
+}
+.Loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50%;
+}
