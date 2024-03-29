@@ -15,16 +15,17 @@ function ProjectCard({project, className}) {
                   href={project.cover}
                   data-gall="portfolioGallery"
                   className="venobox"
-                  title={project.title}
+                  title={'View Full Image of ' + project.title}
+                  target="_blank"
                 >
-                  <i className="icofont-eye-open" />
+                  <i className="icofont-expand" />
                 </a>
-                <a href={project.liveLink} title="Live Link" target="_blank">
-                  <i className="icofont-link" />
-                </a>
-                <a href={project.github} title="Github Respository" target="_blank">
+                {project.liveLink != '' && <a href={project.liveLink} title={'See Deployed Version of ' + project.title} target="_blank">
+                  <i className="icofont-external-link" />
+                </a>}
+                {project.github != '' && <a href={project.github} title="See Github Respository" target="_blank">
                   <i className="icofont-code-alt" />
-                </a>
+                </a>}
               </div>
               <div className="portfolio-info">
                 <h4>{project.title}</h4>

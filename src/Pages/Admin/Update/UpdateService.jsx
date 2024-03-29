@@ -29,6 +29,21 @@ function UpdateService() {
       })
       newServices.allServices.splice(action.index, 1)
       createNewDocument('services', newServices)
+    }else if(action.type == 'visibility'){
+      newServices = {
+        allServices: []
+      };
+      services.allServices.map(item=>{
+        newServices.allServices.push(item)
+      })
+      
+      newServices.allServices.splice(action.index, 1)
+      let newVisibility = !services.allServices[action.index].isActive;
+      newServices.allServices.splice(action.index, 0, {
+        ...services.allServices[action.index],
+        isActive: newVisibility
+      });
+      createNewDocument('services', newServices)
     }
   };
   
@@ -68,6 +83,12 @@ function UpdateService() {
     setMode('new');
     setForm({name:'', description: ''})
   }
+  const handleDrag = (allServices)=> {
+    const newServices = {
+      allServices
+    }
+    createNewDocument('services', newServices)
+  }
 
   return (
     <div className="container-fluid">
@@ -91,6 +112,7 @@ function UpdateService() {
             onAction={handleAction}
             tableTitle="All Services"
             headings={["name", "description"]}
+            onDrag={handleDrag}
           ></DataTable>
         </div>
         <div className="col-12">

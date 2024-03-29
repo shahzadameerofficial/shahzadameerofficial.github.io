@@ -1,12 +1,13 @@
-// ParadoxTable.js
-
 import { useState } from "react";
 import Modal from "./Modal"; // Import your Modal component
-import './DataTable.css'
+import "./DataTable.css";
 import { Button } from "@mui/material";
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from "@mui/icons-material/Edit";
 import TableHeader from "./TableHeader";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 const DataTable = ({
   data,
@@ -15,6 +16,7 @@ const DataTable = ({
   actions,
   onAction,
   checkbox,
+  onDrag
 }) => {
   const [sortBy, setSortBy] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
@@ -149,16 +151,31 @@ const DataTable = ({
 
   // Filter data based on the search term
   const filteredData = sortedData.filter((row) => {
-    const rowValues = columns.map((column) =>
-      row[column]
+    const rowValues = columns.map((column) => row[column]);
+    return rowValues.some((value) =>
+      value.includes(searchTerm.toLowerCase())
     );
-    return rowValues.some((value) => value.includes(searchTerm.toLowerCase()));
   });
+
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = Array.from(filteredData);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+    onDrag(items)
+  };
 
   return (
     <div className="paradox-table">
-      <TableHeader tableTitle={tableTitle + ' ' + `${filteredData.length} - ${data.length}`} onChange={setSearchTerm} value={searchTerm}></TableHeader>
-      
+      <TableHeader
+        tableTitle={tableTitle + " " + `${filteredData.length} - ${data.length}`}
+        onChange={setSearchTerm}
+        value={searchTerm}
+      ></TableHeader>
+
       {checkbox && (
         <div className="bulk-actions">
           <button onClick={() => handleBulkAction("delete")}>
@@ -167,64 +184,96 @@ const DataTable = ({
           {/* Add other bulk action buttons as needed */}
         </div>
       )}
-      <table>
-        <thead>
-          <tr>
-            {checkbox && (
-              <th>
-                <input
-                  type="checkbox"
-                  checked={selectedRows.every((isSelected) => isSelected)}
-                  onChange={handleSelectAllChange}
-                />
-              </th>
-            )}
-            {columns.map((column) => (
-              <th key={column} onClick={() => handleSort(column)}>
-                {column.replace(/([a-zA-Z])([A-Z])([a-z])/g, '$1 $2$3')}
-                {sortBy === column && (
-                  <span>{sortOrder === "asc" ? " ▲" : " ▼"}</span>
-                )}
-              </th>
-            ))}
-            {actions && actions.length > 0 && <th>Actions</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {filteredData.map((row, index) => (
-            <tr key={index}>
-              {checkbox && (
-                <td data-label={columns[index]}>
-                  <input
-                    type="checkbox"
-                    checked={selectedRows[index] || false}
-                    onChange={() => handleCheckboxChange(index)}
-                  />
-                </td>
-              )}
-              {columns.map((column, colIndex) => (
-                <td key={column} data-label={columns[colIndex]}>{row[column]}</td>
-              ))}
-              {actions && actions.length > 0 && (
-                <td data-label='Actions'>
-                  {actions.map((action) => (
-                    <Button
-                      key={action.type}
-                      onClick={() =>
-                        handleActionClick(index, row.id, action.type)
-                      }
-                      title={action.type == 'delete' ? 'Delete Item' : 'Edit Item'}
-                      color={action.type == 'delete' ? 'error' : 'success'}
-                    >
-                      {action.type == 'delete' ? (<DeleteForeverIcon />) : (<EditIcon />)}
-                    </Button>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="rows">
+          {(provided) => (
+            <table {...provided.droppableProps} ref={provided.innerRef}>
+              <thead>
+                <tr>
+                  {checkbox && (
+                    <th>
+                      <input
+                        type="checkbox"
+                        checked={selectedRows.every(
+                          (isSelected) => isSelected
+                        )}
+                        onChange={handleSelectAllChange}
+                      />
+                    </th>
+                  )}
+                  {columns.map((column) => (
+                    <th key={column} onClick={() => handleSort(column)}>
+                      {column.replace(/([a-zA-Z])([A-Z])([a-z])/g, "$1 $2$3")}
+                      {sortBy === column && (
+                        <span>{sortOrder === "asc" ? " ▲" : " ▼"}</span>
+                      )}
+                    </th>
                   ))}
-                </td>
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  {actions && actions.length > 0 && <th>Actions</th>}
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.map((row, index) => (
+                  <Draggable
+                    key={index}
+                    draggableId={index.toString()}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <tr
+                        key={index}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        {checkbox && (
+                          <td data-label={columns[index]}>
+                            <input
+                              type="checkbox"
+                              checked={selectedRows[index] || false}
+                              onChange={() => handleCheckboxChange(index)}
+                            />
+                          </td>
+                        )}
+                        {columns.map((column, colIndex) => (
+                          <td key={column} data-label={columns[colIndex]}>
+                            {row[column]}
+                          </td>
+                        ))}
+                        {actions && actions.length > 0 && (
+                          <td data-label="Actions">
+                            {actions.map((action) => (
+                              <Button
+                                key={action.type}
+                                onClick={() =>
+                                  handleActionClick(index, row.id, action.type)
+                                }
+                                title={
+                                  action.type == "delete"
+                                    ? "Delete Item"
+                                    : "Edit Item"
+                                }
+                                color={action.type == "delete" ? "error" : "success"}
+                              >
+                                {action.type == "delete" && ( <DeleteForeverIcon /> ) } 
+                                {action.type == "edit" && (<EditIcon />)}
+                              </Button>
+                            ))}
+                            <Button onClick={() =>
+                                  handleActionClick(index, row.id, 'visibility')
+                                } color={row.isActive ? 'success' : 'error'}>{row.isActive ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
+                            </Button>
+                          </td>
+                        )}
+                      </tr>
+                    )}
+                  </Draggable>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </Droppable>
+      </DragDropContext>
       {showModal && selectedAction && selectedAction.type === "delete" && (
         <Modal
           modalId={selectedAction.modalId}

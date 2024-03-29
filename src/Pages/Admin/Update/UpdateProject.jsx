@@ -59,6 +59,21 @@ function UpdateProject() {
     })
     newProjects.allProjects.splice(action.index, 1)
     createNewDocument('projects', newProjects)
+  }else if(action.type == 'visibility'){
+    newProjects = {
+      allProjects: []
+    };
+    projects.allProjects.map(item=>{
+      newProjects.allProjects.push(item)
+    })
+    
+    newProjects.allProjects.splice(action.index, 1)
+    let newVisibility = !projects.allProjects[action.index].isActive;
+    newProjects.allProjects.splice(action.index, 0, {
+      ...projects.allProjects[action.index],
+      isActive: newVisibility
+    });
+    createNewDocument('projects', newProjects)
   }
   };
   const handleUpdating = (value) => {
@@ -110,6 +125,12 @@ function UpdateProject() {
       [name]: value
     }));
   };
+  const handleDrag = (allProjects)=> {
+    const newProjects = {
+      allProjects
+    }
+    createNewDocument('projects', newProjects)
+  }
 
   return (
     <div className="container-fluid">
@@ -139,6 +160,7 @@ function UpdateProject() {
             onAction={handleAction}
             tableTitle="Projects"
             headings={["title", "description", 'primaryTechnology']}
+            onDrag={handleDrag}
           ></DataTable>
         </div>
         <div className="col-12">

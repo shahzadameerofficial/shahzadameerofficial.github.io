@@ -1,15 +1,35 @@
 import { useSelector } from 'react-redux'
 import ProjectCard from './ProjectCard'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
+import Isotope from 'isotope-layout'
 function Projects() {
   const { allProjects } = useSelector((state)=> state.portfolio.projects);
   const [filters, setFilters] = useState([]);
   const classList = 'col-lg-4 col-md-6 portfolio-item ';
+  const isotope = useRef()
+  // store the filter keyword in a state
+  const [filterKey, setFilterKey] = useState('*')
   useEffect(()=>{
     if (allProjects.length > 0) {
-      setFilters([...new Set(allProjects.map(obj => obj.primaryTechnology.toLowerCase()))]);
+      setFilters([...new Set(allProjects.map(obj => obj.isActive && obj.primaryTechnology.toLowerCase()))]);
     }
-  },[allProjects])
+  },[allProjects]);
+  useEffect(() => {
+    isotope.current = new Isotope('.portfolio-container', {
+      itemSelector: '.portfolio-item',
+      layoutMode: 'fitRows',
+    })
+    // cleanup
+    return () => isotope.current.destroy()
+  }, [])
+  useEffect(() => {
+    filterKey === '*'
+      ? isotope.current.arrange({filter: `*`})
+      : isotope.current.arrange({filter: `.${filterKey}`})
+  }, [filterKey])
+
+  const handleFilterKeyChange = key => () => setFilterKey(key)
+
   return (
     <section id="projects" className="portfolio">
       <div className="container">
@@ -20,12 +40,12 @@ function Projects() {
         <div className="row" data-aos="fade-up" data-aos-delay={100}>
           <div className="col-lg-12">
             <ul id="portfolio-flters">
-              <li data-filter="*" className="filter-active">
+              <li className={filterKey == '*' && 'filter-active'} onClick={handleFilterKeyChange('*')}>
                 All
               </li>
               {
                 filters.map((filter, index)=> (
-                  <li key={index} data-filter={'.' + filter} style={{textTransform: 'capitalize'}}>{filter}</li>
+                  <li key={index} style={{textTransform: 'capitalize'}} className={filterKey == filter && 'filter-active'} onClick={handleFilterKeyChange(filter)}>{filter}</li>
                 ))
               }
             </ul>
@@ -39,7 +59,7 @@ function Projects() {
         >
           {
             allProjects?.map((project, index) => (
-              <ProjectCard className={classList} key={index} project={project}/>
+              project.isActive && <ProjectCard className={classList} key={index} project={project}/>
             ))
           }
           {/* <div className="col-lg-4 col-md-6 portfolio-item filter-app">
