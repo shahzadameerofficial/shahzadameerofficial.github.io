@@ -88,7 +88,7 @@ function Footer() {
                   <img style={{width: '24px', height: '24px'}} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACJUlEQVR4nO2WTYhOURjHr6+IJEX5SGwYGVkgkVAzUlOzQzYWUzY2ygplpdEMZZiajaE0YjMazcKGlMxibGaDoqahZMZCWVigqcFPp3ne+jvOO273fU1uPb86dZ//c+5z7v98vW+WOY7jOI7jOI5TZoC5QBNwGjhrrTErE8AyYIg/OZ6VCaA3YaKURj7Kx98HDgEHgVVZWQAWRatwoI615wCrgQ3AwkR+E7DD2prQB9glWmhbre9GYE84BqmBPpOfAeCLxPulzlXRB83AKeC96N+AO8GYvPdU8jeA0cS4Y8B1iVtqNdIH3JX4itQJg1U4Atycoc44sDZhZLJK/1hPGumzM6E8Ae5ZexcZaZF41GpsES1MzFGJJ4DDYbsCj0QfTBjBbs5LwEN+Z8JWPeQa8p6RfZILW0GNzI8uhs3AOYlvRRNzWfa6TsJ3YEVkZChsSRv3pOhTwPo8BzK3EdN6RDsDDEvcDLwkH7sjIx0yrhp5+1cTBY2ED6jwCvhhzx+AecALyYfnx1XatshIexUjY//KSLiR3iRmuMvy/aJ1S62lwDFguWiFjDB95p7ZhDQWMmL6hYSR7ZYLP6YVfgIPgE7guez53qJGmF71T5IfqcVIQ/TO62iwa1TnK7C3BiOL7bKoMF7YiOVGJHc+sfxtwaD0mbKrfaf06ZIz0yZ6q+i3E7UvSs0T2WwALLG/KAvqXHcdsLKeNR3HcRzHcRzHcRwn+z/4BVQBUg/5BMdjAAAAAElFTkSuQmCC" />
                   </i>
                 </a>
-                <a href={about?.skype} target="_blank" className="google-plus">
+                <a href={about?.github} target="_blank" className="google-plus">
                   <i className="bx bxl-github" />
                 </a>
               </div>
