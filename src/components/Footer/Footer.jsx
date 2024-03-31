@@ -22,7 +22,7 @@ function Footer() {
                 <a href={"callto:" + about?.contactNo}>{about?.contactNo}</a>
                 <br />
                 <strong>Email:</strong>{" "}
-                <a href={emailTemplate + about?.email}>@{about?.email.split("@")[0]}</a>
+                <a href={emailTemplate + about?.email}>@{about?.email?.split("@")[0]}</a>
                 <br />
               </p>
             </div>
