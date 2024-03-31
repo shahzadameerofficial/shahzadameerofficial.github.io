@@ -21,6 +21,7 @@ function UpdateFaq() {
   const [form, setForm] = useState({
     question: "",
     answer: "",
+    isActive: true
   });
   let [open, setOpen] = useState(false);
   let [mode, setMode] = useState("new"); // can be edit or new

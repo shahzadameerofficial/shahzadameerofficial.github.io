@@ -14,7 +14,7 @@ function Services() {
         <div className="row">
           {
             allServices?.map((service, index)=>(
-              <ServiceCard className={classList} service={service} key={index}/>
+             service.isActive && <ServiceCard className={classList} service={service} key={index}/>
             ))
           }
           {/* <div

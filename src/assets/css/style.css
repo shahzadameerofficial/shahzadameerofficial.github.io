@@ -1,24 +1,7 @@
-/**
-* Template Name: Ninestars - v2.0.0
-* Template URL: https://bootstrapmade.com/ninestars-free-bootstrap-3-theme-for-creative/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
   color: #212529;
 }
-/* Originals */
-/* #eb5d1e */
-/* #ee7843 */
-/* #ef7f4d */
-/* #f39e7a */
-/* #fef8f5 */
-/* #fdf1ec */
 :root{
   --accent: #0a8ce2;
   --accent2: #51a7e0;
@@ -386,6 +369,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   letter-spacing: 1px;
   display: inline-block;
   padding: 8px 28px;
+  text-decoration: none;
   border-radius: 3px;
   transition: 0.5s;
   margin: 10px;
@@ -395,6 +379,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 
 #hero .btn-get-started:hover {
   background: var(--accent3);
+  border-radius: 30px;
 }
 
 #hero .animated {
@@ -409,7 +394,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 
 @media (max-width: 991px) {
   #hero {
-    height: calc(100vh - 72px);
+    height: 100%;
   }
   #hero .animated {
     -webkit-animation: none;
@@ -417,9 +402,6 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   }
   #hero .hero-img {
     text-align: center;
-  }
-  #hero .hero-img img {
-    width: 50%;
   }
 }
 
@@ -433,15 +415,6 @@ h1, h2, h3, h4, h5, h6, .font-primary {
     line-height: 24px;
     margin-bottom: 30px;
   }
-  /* #hero .hero-img img {
-    width: 70%;
-  } */
-}
-
-@media (max-width: 575px) {
-  /* #hero .hero-img img {
-    width: 80%;
-  } */
 }
 
 @-webkit-keyframes up-down {

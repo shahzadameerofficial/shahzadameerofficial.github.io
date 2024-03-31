@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 function UpdateService() {
   let {services} = useSelector((state)=> state.portfolio)
-  const [form, setForm] = useState({name: '', description: '', icon:''})
+  const [form, setForm] = useState({name: '', description: '', icon:'', isActive: true})
   let [open, setOpen] = useState(false);
   let [mode, setMode] = useState('new') // can be edit or new
   const [index, setIndex] = useState(null);

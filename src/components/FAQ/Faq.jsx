@@ -1,8 +1,17 @@
 import { useSelector } from "react-redux"
 import FaqCard from "./FaqCard"
+import { useState } from "react";
 
 function Faq() {
-  const { faqs } = useSelector((state)=> state.portfolio)
+  const { faqs } = useSelector((state)=> state.portfolio);
+  const [active, setActive] = useState(0)
+  const toggleFaq = (i) => {
+    if(i != active){
+      setActive(i)
+    }else{
+      setActive(-1)
+    }
+  }
   return (
     <section id="faq" className="faq section-bg">
       <div className="container">
@@ -13,7 +22,7 @@ function Faq() {
         <ul className="faq-list">
           {
             faqs.allFaqs.map((faq, index)=> (
-              <FaqCard key={index} index={index} faq={faq}></FaqCard>
+              <FaqCard key={index} index={index} faq={faq} getClick={toggleFaq} current={active}></FaqCard>
             ))
           }
           

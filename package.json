@@ -21,7 +21,6 @@
     "bootstrap": "^4.4.1",
     "boxicons": "^2.1.4",
     "firebase": "^10.8.1",
-    "isotope-layout": "^3.0.6",
     "jquery": "^3.7.1",
     "jquery.easing": "^1.4.1",
     "localforage": "^1.10.0",

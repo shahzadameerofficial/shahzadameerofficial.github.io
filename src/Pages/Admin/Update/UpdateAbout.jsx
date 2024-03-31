@@ -44,6 +44,7 @@ function UpdateAbout() {
     skype: "",
     zoom: "",
     facebook: "",
+    youtube: "",
     github: "",
     instagram: "",
     peoplePerHour: "",
@@ -340,6 +341,16 @@ function UpdateAbout() {
                     label="Facebook Link"
                     name="facebook"
                     value={form.facebook}
+                    onInput={handleChange}
+                    variant={currentVariant}
+                    fullWidth
+                  />
+                </div>
+                <div className="col-md-6 mb-3">
+                  <TextField
+                    label="Youtube Channel"
+                    name="youtube"
+                    value={form.youtube}
                     onInput={handleChange}
                     variant={currentVariant}
                     fullWidth

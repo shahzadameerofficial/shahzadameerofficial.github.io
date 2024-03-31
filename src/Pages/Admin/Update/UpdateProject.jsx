@@ -116,6 +116,7 @@ function UpdateProject() {
       cover: "",
       github: "",
       liveLink: "",
+      isActive: true
     });
   };
   const handleChange = (event) => {
